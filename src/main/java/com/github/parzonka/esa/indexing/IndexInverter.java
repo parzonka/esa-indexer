@@ -76,19 +76,18 @@ public class IndexInverter {
 		final TermEnum termEnum = reader.terms();
 		final Set<String> terms = new HashSet<String>();
 
-		int ignoredTerms = 0;
+		int totalTerms = 0;
 		while (termEnum.next()) {
 			final String term = termEnum.term().text();
 			final int termDocFreq = termEnum.docFreq();
 			if (minDocumentFrequency <= termDocFreq && termDocFreq < maxDocumentDistributionCount) {
 				terms.add(term);
-				continue;
 			}
-			ignoredTerms++;
+			totalTerms++;
 		}
 		reader.close();
 
-		System.out.println(terms.size() + " terms found. " + ignoredTerms + " terms ignored.");
+		System.out.println("Using " + terms.size() + " terms out of " + totalTerms);
 		System.out.println("Input Lucene index: " + luceneIndexDir);
 		final LuceneVectorReader luceneVectorReader = new LuceneVectorReader(luceneIndexDir);
 		configureLuceneVectorReader(luceneVectorReader);
