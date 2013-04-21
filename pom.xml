@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.parzonka</groupId>
-	<artifactId>esa-indexing</artifactId>
+	<artifactId>esa-indexer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>esa-indexing</name>
+	<name>esa-indexer</name>
 
 	<!-- we inherit from the parent as suggested in http://code.google.com/p/dkpro-core-asl/wiki/MyFirstDKProProject -->
 	<parent>
