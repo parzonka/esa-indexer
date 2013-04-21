@@ -57,7 +57,7 @@ public class IndexInverter {
 		invertedIndexDir.mkdirs();
 
 		final IndexReader reader = IndexReader.open(FSDirectory.open(luceneIndexDir));
-		final int maxDocumentDistributionCount = (int) maxCorpusDistribution * reader.numDocs();
+		final int maxDocumentDistributionCount = (int) Math.ceil(maxCorpusDistribution * reader.numDocs());
 		final TermEnum termEnum = reader.terms();
 		final Set<String> terms = new HashSet<String>();
 		
