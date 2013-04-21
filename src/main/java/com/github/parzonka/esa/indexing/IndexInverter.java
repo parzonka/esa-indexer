@@ -36,32 +36,32 @@ import de.tudarmstadt.ukp.similarity.algorithms.vsm.store.convert.ConvertLuceneT
 import de.tudarmstadt.ukp.similarity.algorithms.vsm.store.vectorindex.VectorIndexWriter;
 
 /**
- * Creates an inverted index for ESA. Based on {@link ConvertLuceneToVectorIndex}.
+ * Creates an inverted index for ESA. Based on
+ * {@link ConvertLuceneToVectorIndex}.
  * 
  * @author Mateusz Parzonka
- *
+ * 
  */
 public class IndexInverter {
 
 	private final File luceneIndexDir;
-	private final File invertedIndexDir; 
+	private final File invertedIndexDir;
 
 	private double maxCorpusDistribution = 0.1f;
 	private int minDocumentFrequency = 3;
-	
-	
+
 	public IndexInverter() {
 		super();
-		this.luceneIndexDir  = new File("target/lucene");
+		this.luceneIndexDir = new File("target/lucene");
 		this.invertedIndexDir = new File("target/esa");
 	}
-	
+
 	public IndexInverter(File luceneIndexDir, File invertedIndexDir) {
 		super();
 		this.luceneIndexDir = luceneIndexDir;
 		this.invertedIndexDir = invertedIndexDir;
 	}
-	
+
 	protected void configureLuceneVectorReader(LuceneVectorReader luceneVectorReader) {
 		// standard configuration
 	}
@@ -75,7 +75,7 @@ public class IndexInverter {
 		final int maxDocumentDistributionCount = (int) Math.ceil(maxCorpusDistribution * reader.numDocs());
 		final TermEnum termEnum = reader.terms();
 		final Set<String> terms = new HashSet<String>();
-		
+
 		int ignoredTerms = 0;
 		while (termEnum.next()) {
 			final String term = termEnum.term().text();
@@ -90,10 +90,11 @@ public class IndexInverter {
 
 		System.out.println(terms.size() + " terms found. " + ignoredTerms + " terms ignored.");
 		System.out.println("Input Lucene index: " + luceneIndexDir);
-		LuceneVectorReader luceneVectorReader = new LuceneVectorReader(luceneIndexDir);
+		final LuceneVectorReader luceneVectorReader = new LuceneVectorReader(luceneIndexDir);
 		configureLuceneVectorReader(luceneVectorReader);
 		System.out.println("Output inverted index: " + invertedIndexDir);
-		VectorIndexWriter vectorIndexWriter = new VectorIndexWriter(invertedIndexDir, luceneVectorReader.getConceptCount());
+		final VectorIndexWriter vectorIndexWriter = new VectorIndexWriter(invertedIndexDir,
+				luceneVectorReader.getConceptCount());
 
 		final ProgressMeter progressMeter = new ProgressMeter(terms.size());
 		for (String term : terms) {
@@ -104,7 +105,7 @@ public class IndexInverter {
 		}
 		vectorIndexWriter.close();
 	}
-	
+
 	public double getMaxCorpusDistribution() {
 		return maxCorpusDistribution;
 	}
