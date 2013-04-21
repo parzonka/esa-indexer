@@ -121,7 +121,7 @@ public class IndexInverter {
 	 */
 	public void setMinDocumentFrequency(int minDocumentFrequency) {
 		if (minDocumentFrequency < 0) {
-			throw new IllegalArgumentException("maxCorpusDistribution must be in [0, 1]");
+			throw new IllegalArgumentException("minDocumentFrequency must be in [0,)");
 		}
 		this.minDocumentFrequency = minDocumentFrequency;
 	}
