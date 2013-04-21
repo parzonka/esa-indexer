@@ -62,7 +62,7 @@ public class EsaWikipedia {
 		AnalysisEngine indexTermGenerator = createPrimitive(
 				LuceneIndexer.class,
 				LuceneIndexer.PARAM_INDEX_PATH, luceneIndexPath,
-				LuceneIndexer.PARAM_MIN_TERMS_PER_DOCUMENT, 1);
+				LuceneIndexer.PARAM_MIN_TERMS_PER_DOCUMENT, 50);
 
 		SimplePipeline.runPipeline(reader, segmenter, stemmer, indexTermGenerator);
 		
